@@ -1,0 +1,10 @@
+
+# Exclude env
+env/
+
+# Exclude payload build dir
+click2pwn/buffer_overflow/build/
+
+# Exclude vim swap files
+*.swp
+*.swo
