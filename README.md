@@ -47,4 +47,4 @@ This exploit was developed by a team of 3 students, namely:
 * [Leonardo Mathon](https://github.com/leonardomathon)
 * [Rick de Jager](https://github.com/rickdejager)
 
-It was developed as a part of the "Offensive Security" course, taught at Eindhoven University of Technology, by [Luca Allodi](https://lallodi.github.io/index.html). We'd like to thank Mr. Allodi and all TA's involved in the course for teaching us about various exploits, attack vectors, and for helping us trouble-shoot issues.
+It was developed as a part of the "Offensive Security" course, taught at Eindhoven University of Technology, by [Luca Allodi](https://lallodi.github.io/index.html). We'd like to thank Dr. Allodi and all TA's involved in the course for teaching us about various exploits, attack vectors, and for helping us trouble-shoot issues.
