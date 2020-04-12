@@ -1,9 +1,15 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
 
 # Exclude env
 env/
 
 # Exclude payload build dir
 click2pwn/buffer_overflow/build/
+
+# Exclude payload binaries
+*bin
 
 # Exclude vim swap files
 *.swp
