@@ -1,6 +1,10 @@
 # Dagro-Hacks
 This repo contains a PoC that can be used to gain a shell on several Dagro IP Cameras.
 
+## TLDR
+
+![Hacking in progress](doc/res/shell_dark.gif)
+
 ## Installing
 
 The exploit was developed on linux, and will require some minor changes to work on Windows. Our installation instructions assume you are running a fresh install of Ubuntu 18. 
