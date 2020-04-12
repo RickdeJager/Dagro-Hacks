@@ -38,3 +38,13 @@ To run the script, navigate to the `click2pwn` directory, activate the `venv` an
 python main.py [target ip]
 ```
 Typing `help` will show a full list of supported commands. The most interesting one being `shell`, which opens a reverse shell on the target host.
+
+
+# Acknowledgments
+
+This exploit was developed by a team of 3 students, namely:
+* [Luke Serné](https://github.com/LukeSerne)
+* [Leonardo Mathon](https://github.com/leonardomathon)
+* [Rick de Jager](https://github.com/rickdejager)
+
+It was developed as a part of the "Offensive Security" course, taught at Eindhoven University of Technology, by [Luca Allodi](https://lallodi.github.io/index.html). We'd like to thank Mr. Allodi and all TA's involved in the course for teaching us about various exploits, attack vectors, and for helping us trouble-shoot issues.
