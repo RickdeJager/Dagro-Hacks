@@ -47,6 +47,21 @@ Every modern repository comes with a Dockerfile, and we did not want to fall beh
 1. `docker build . -t dagro-hacks`
 1. `docker run --network=host -it dagro-hacks`
 
+# FAQ / Troubleshooting
+
+## The camera crashes before the port scan completes
+Sadly, the model we tested with has a randomized port scan in the `20000-62000` range. This requires a large port scan which can overwhelm the camera. The nmap arguments can be changed in `network/port_scan.py`.
+
+## The port scan is too slow
+The port scan might take up to 5 minutes. In our experience, the scan is slightly slower in the docker container. We tried to balance speed against reliability. The port scan can be sped up by editing the nmap arguments.
+
+## The webserver port of my camera is not in the scan range
+You can manually set the port of the camera by typing:
+```
+set tport xxxx
+```
+
+
 # Acknowledgments
 
 This exploit was developed by a team of 3 students, namely:
