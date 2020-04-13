@@ -12,7 +12,6 @@ The exploit was developed on linux, and will require some minor changes to work 
   
 We also provide a `Dockerfile`. Keep in mind that your docker host needs to support [the "host" networking driver](https://docs.docker.com/network/network-tutorial-host/#prerequisites) which is, at time of writing, only available on linux. Skip to [Docker](#Docker) for instructions.
 
-
 You need the following tools to run this exploit:
 
 ### GCC toolchain
@@ -42,20 +41,20 @@ python main.py [target ip]
 ```
 Typing `help` will show a full list of supported commands. The most interesting one being `shell`, which opens a reverse shell on the target host.
 
-# Docker
-Every modern repository comes with a Dockerfile, and we did not want to fall behind. To run our tool using docker:  
+## Docker
+Every modern repository comes with a Dockerfile and we did not want to fall behind. To run our tool using docker:  
 1. `docker build . -t dagro-hacks`
 1. `docker run --network=host -it dagro-hacks`
 
-# FAQ / Troubleshooting
+## FAQ / Troubleshooting
 
-## The camera crashes before the port scan completes
+### The camera crashes before the port scan completes
 Sadly, the model we tested with has a randomized port scan in the `20000-62000` range. This requires a large port scan which can overwhelm the camera. The nmap arguments can be changed in `network/port_scan.py`.
 
-## The port scan is too slow
+### The port scan is too slow
 The port scan might take up to 5 minutes. In our experience, the scan is slightly slower in the docker container. We tried to balance speed against reliability. The port scan can be sped up by editing the nmap arguments.
 
-## The webserver port of my camera is not in the scan range
+### The webserver port of my camera is not in the scan range
 You can manually set the port of the camera by typing:
 ```
 set tport xxxx
