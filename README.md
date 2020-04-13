@@ -60,6 +60,9 @@ You can manually set the port of the camera by typing:
 set tport xxxx
 ```
 
+# Background information
+
+More information on _how_ our exploit was developed can be found [here](docs/content/index.md).
 
 # Acknowledgments
 
