@@ -11,7 +11,9 @@ import colorama
 
 start, end = 20000, 62000
 
-def find_web_server(ip_addr, args="--max-parallelism 1"):
+# The arguments are meant to slow nmap down.
+# Otherwise the poor single core camera can't keep up
+def find_web_server(ip_addr, args="--max-parallelism 1 -sT"):
     '''
     Uses the nmap import to find web server's port
     '''
