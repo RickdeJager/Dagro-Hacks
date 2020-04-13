@@ -1,5 +1,6 @@
 import time
 import socket
+import colorama
 
 from .port_scan import find_web_server, get_local_ip
 from .send_req import connect_reverse_shell

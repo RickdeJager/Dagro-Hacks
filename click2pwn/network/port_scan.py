@@ -1,6 +1,7 @@
 from socket import *
 import nmap
 import subprocess
+import colorama
 
 '''
     Performs a port scan to find web server's port.
