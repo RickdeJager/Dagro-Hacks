@@ -9,6 +9,8 @@ Our tool can be used to gain a root shell on a number of different IP Cameras. T
 ## Installing
 
 The exploit was developed on linux, and will require some minor changes to work on Windows. Our installation instructions assume you are running a fresh install of Ubuntu 18. 
+  
+We also provide a `Dockerfile`. Keep in mind that your docker host needs to support [the "host" networking driver](https://docs.docker.com/network/network-tutorial-host/#prerequisites) which is, at time of writing, only available on linux. Skip to [Docker](#Docker) for instructions.
 
 
 You need the following tools to run this exploit:
@@ -40,6 +42,10 @@ python main.py [target ip]
 ```
 Typing `help` will show a full list of supported commands. The most interesting one being `shell`, which opens a reverse shell on the target host.
 
+# Docker
+Every modern repository comes with a Dockerfile, and we did not want to fall behind. To run our tool using docker:  
+1. `docker build . -t dagro-hacks`
+1. `docker run --network=host -it dagro-hacks`
 
 # Acknowledgments
 
