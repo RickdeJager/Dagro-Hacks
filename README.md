@@ -30,7 +30,7 @@ The fastest way to setup your environment is to use `venv`:
 1. `python3 -m pip install --user virtualenv`
 1. `python3 -m venv env`
 1. `source env/bin/activate`
-1. `pip install requirements.txt`  
+1. `pip install -r requirements.txt`  
 
 When you want to leave this env, run `deactivate`.  
 
