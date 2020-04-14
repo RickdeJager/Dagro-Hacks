@@ -62,7 +62,7 @@ set tport xxxx
 
 # Background information
 
-More information on _how_ our exploit was developed can be found [here](docs/content/index.md).
+More information on _how_ our exploit was developed can be found [here](doc/content/index.md).
 
 # Acknowledgments
 

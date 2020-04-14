@@ -19,7 +19,7 @@ I Ultimately don't know enough about U-Boot to fix either of these issues.
 
 ## The solution
 
-In the end, everything is "just" data. So why can't I just dump the flash, path it, and flash it to the camera?  
+In the end, everything is "just" data. So why can't I just dump the flash, patch it, and flash it to the camera?  
 
 ### Gathering information
 
@@ -29,7 +29,9 @@ The first step is to find the affected partition. This can be done through U-Boo
 1. Look for a line detailing the partition sizes.
 
 ```
-bootargs=mem=64M gmmem=34M console=ttyS0,115200 user_debug=31 init=/squashfs_init root=/dev/mtdblock2 rootfstype=cramfs mtdparts=nor-flash:512K(boot),1856K(kernel),4672K(romfs),5248K(user),2048K(web),1024K(custom),1024K(mtd)
+bootargs=mem=64M gmmem=34M console=ttyS0,115200 user_debug=31 init=/squashfs_init
+   root=/dev/mtdblock2 rootfstype=cramfs mtdparts=norflash:512K(boot),1856K(kernel),
+   4672K(romfs),5248K(user),2048K(web),1024K(custom),1024K(mtd)
 ```
 As a quick check, these numbers add to 16 MB, the exact size of our flash chip.  
 The faulty partition is the `mtd` partition, starting at 15 MB.
@@ -73,7 +75,9 @@ Time to bust out the trusty SOP8 clip again, mount it to the memory chip and use
 ```bash
 flashrom --programmer ch341a_spi -w patched.bin
 ```
-After about 10 minutes, the programmer should have finished writing the binary. Now you can disconnect the clip, and plug in the camera. If all went well, you will be greeted with a cheerful _"Camera Ready!_
+After about 10 minutes, the programmer should have finished writing the binary. Now you can disconnect the clip, and plug in the camera. If all went well, you will be greeted with a cheerful _"Camera Ready!"_
   
-At this point the camera can be reassembled, and live happily ever after.
-
+At this point the camera can be reassembled, and live happily ever after.  
+  
+  
+ \- Rick
