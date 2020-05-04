@@ -1,4 +1,4 @@
-# Background information, W.I.P.
+# Background information
 
 This section is meant for future reference. Some of the techniques we used for this project were new to us, so we wanted a place to document some of the research we did.  
 
