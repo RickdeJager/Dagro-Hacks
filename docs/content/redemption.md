@@ -47,7 +47,14 @@ This takes a little over five minutes to complete. Be sure not to disturb the ca
 
 ### Patching the binary dump
 
-First isolate the partition:
+Before the jffs2 partition can be mounted, some packages and modprobes need to be present. These are the requirements for Ubuntu 19:  
+```bash
+apt-get install mtd-utils
+modprobe jffs2
+modprobe mtdram
+modprobe mtdblock
+```
+Now the partition can be isolated from the flash dump:
 ```bash
 dd if=dump.bin of=jff2.bin bs=1M skip=15
 ```
