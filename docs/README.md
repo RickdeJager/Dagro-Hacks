@@ -14,8 +14,10 @@ With the camera unplugged, place the clip over the flash chip, making sure to li
 ```bash
 flashrom --programmer [your_programmer_here] -r dump.bin
 ```
-It might take a few tries to get a solid connection.
+It might take a few tries to get a solid connection.  
+
 ![An example of a successful dump](res/dump_flash.jpg)  
+
 Finally, you can use binwalk to extract files from your raw flash dump:
 ```bash
 binwalk -Me dump.bin
@@ -23,15 +25,17 @@ binwalk -Me dump.bin
 This should give you access to all the password files, secret keys and binaries your heart desires.
 
 ### Accessing UART
-Most embedded devices will come with a debugging interface. UART is one of the most common options and was also present on our camera. Typically, it can be identified by a row of 3 to 4 contacts in a row. In our case however, the UART connection consisted of 2 _tiny_ contacts near the SoC.
-![Some very average soldering work](res/UART_pads.jpg)
+Most embedded devices will come with a debugging interface. UART is one of the most common options and was also present on our camera. Typically, it can be identified by a row of 3 to 4 contacts in a row. In our case however, the UART connection consisted of 2 _tiny_ contacts near the SoC.  
+
+![Some very average soldering work](res/UART_pads.jpg)  
 
 With these wires attached you can connect to your serial port. First measure the voltage (ours was running at 3.3V) and setup your serial connector to use the same voltage. Actually getting into the bootloader requires a bit of trickery. Here's our process:  
 1. Plug in the serial port and camera at the same time.
 1. Open a serial connection (in our case using `picocom /dev/ttyUSB0 -b 11520`
-1. spam `ctrl-c` to cancel the boot process.
-When performing these steps in rapid succession (< 2 seconds), you will be greeted by a U-boot command line.
-![UART setup](res/uboot_uart.jpg)
+1. spam `ctrl-c` to cancel the boot process.  
+When performing these steps in rapid succession (< 2 seconds), you will be greeted by a U-boot command line.  
+
+![UART setup](res/uboot_uart.jpg)  
 
 ## Redeeming a fallen camera.
 
