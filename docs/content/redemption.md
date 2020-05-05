@@ -20,8 +20,12 @@ I Ultimately don't know enough about U-Boot to fix either of these issues.
 ## The solution
 
 In the end, everything is "just" data. So why can't I just dump the flash, patch it, and flash it to the camera?  
+  
+Here is the game-plan to unbrick our camera:  
+![Who doesn't love mediocre diagrams?](../res/recovery_plan.png)
 
-### Gathering information
+### (1) Separating the faulty partition
+#### Gathering information
 
 The first step is to find the affected partition. This can be done through U-Boot:
 1. Connect both UART and usb power to the camera.
@@ -36,7 +40,7 @@ bootargs=mem=64M gmmem=34M console=ttyS0,115200 user_debug=31 init=/squashfs_ini
 As a quick check, these numbers add to 16 MB, the exact size of our flash chip.  
 The faulty partition is the `mtd` partition, starting at 15 MB.
 
-### Dumping the flash
+#### Dumping the flash
 
 Time to crack the camera open again. To dump the flash I used a SOP8 test clip, clamped over the chip. The flash can be dumped to a binary file using `flashrom`:  
 ```bash
@@ -45,7 +49,13 @@ flashrom --programmer ch341a_spi -r dump.bin
 
 This takes a little over five minutes to complete. Be sure not to disturb the camera.
 
-### Patching the binary dump
+#### Cutting out the partition
+Now the partition can be isolated from the flash dump using the following command.
+```bash
+dd if=dump.bin of=jff2.bin bs=1M skip=15
+```
+
+### (2) Removing the file
 
 Before the jffs2 partition can be mounted, some packages and modprobes need to be present. These are the requirements for Ubuntu 19:  
 ```bash
@@ -54,23 +64,20 @@ modprobe jffs2
 modprobe mtdram
 modprobe mtdblock
 ```
-Now the partition can be isolated from the flash dump:
-```bash
-dd if=dump.bin of=jff2.bin bs=1M skip=15
-```
-The next steps are to mount the partition, remove the file and save the partition.
+The next step is to mount the partition. It takes a little extra effort, because jffs2 partitions require a block device.
 ```bash
 mknok /dev/mtdblocktest -b 31
 dd if=jff2.bin of=/dev/mtdblocktest
 mkdir tmp_part
 mount -t jffs2 /dev/mtdblocktest tmp_part
 ```
-Now you can simply remove the file from the tmp_part to free some space. The next step is to write the new contents to a binary file.
+Now you can simply remove the file from the tmp_part to free some space. When you are done, use the following commands to unmount and save the patched partition.
 ```bash
 umount tmp_part
 dd if=/dev/mtdblocktest of=jffs2patched.bin bs=1M count=1
 
 ```
+### (3) Combining the partitions
 The final step is to mix both binaries together:
 ```bash
 (dd if=dump.bin bs=1M count=15 && dd if=jffs2patched.bin bs=1) > patched.bin
