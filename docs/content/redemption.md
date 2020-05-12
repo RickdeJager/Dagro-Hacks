@@ -22,7 +22,7 @@ I Ultimately don't know enough about U-Boot to fix either of these issues.
 In the end, everything is "just" data. So why can't I just dump the flash, patch it, and flash it to the camera?  
   
 Here is the game-plan to unbrick our camera:  
-![Who doesn't love mediocre diagrams?](../res/recovery_plan.png)
+![Who doesn't love mediocre diagrams?](../res/recovery_plan.png "Who doesn't love mediocre diagrams?")
 
 ### (1) Separating the faulty partition
 #### Gathering information
@@ -75,7 +75,6 @@ Now you can simply remove the file from the tmp_part to free some space. When yo
 ```bash
 umount tmp_part
 dd if=/dev/mtdblocktest of=jffs2patched.bin bs=1M count=1
-
 ```
 ### (3) Combining the partitions
 The final step is to mix both binaries together:
