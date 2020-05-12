@@ -16,7 +16,7 @@ flashrom --programmer [your_programmer_here] -r dump.bin
 ```
 It might take a few tries to get a solid connection.  
 
-![An example of a successful dump](res/dump_flash.jpg)  
+![An example of a successful dump](res/dump_flash.jpg "An example of a successful dump")  
 
 Finally, you can use binwalk to extract files from your raw flash dump:
 ```bash
@@ -27,7 +27,7 @@ This should give you access to all the password files, secret keys and binaries 
 ### Accessing UART
 Most embedded devices will come with a debugging interface. UART is one of the most common options and was also present on our camera. Typically, it can be identified by a row of 3 to 4 contacts in a row. In our case however, the UART connection consisted of 2 _tiny_ contacts near the SoC.  
 
-![Some very average soldering work](res/UART_pads.jpg)  
+![Some very average soldering work](res/UART_pads.jpg "Some very average soldering work")  
 
 With these wires attached you can connect to your serial port. First measure the voltage (ours was running at 3.3V) and setup your serial connector to use the same voltage. Actually getting into the bootloader requires a bit of trickery. Here's our process:  
 1. Plug in the serial port and camera at the same time.
@@ -35,7 +35,7 @@ With these wires attached you can connect to your serial port. First measure the
 1. spam `ctrl-c` to cancel the boot process.  
 When performing these steps in rapid succession (< 2 seconds), you will be greeted by a U-boot command line.  
 
-![UART setup](res/uboot_uart.jpg)  
+![UART setup](res/uboot_uart.jpg "UART setup")  
 
 ## Redeeming a fallen camera.
 
