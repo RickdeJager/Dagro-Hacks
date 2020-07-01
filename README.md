@@ -4,7 +4,7 @@ This repo contains a PoC that can be used to gain a shell on several Dagro IP Ca
 ## TLDR
 
 Our tool can be used to gain a root shell on a number of different IP Cameras. The only thing the user needs to enter is the IP of the camera.
-![Hacking in progress](docs/res/shell_dark.gif)
+![Hacking in progress](docs/res/shell_dark.gif "Hacking in progress")
 
 ## Installing
 
